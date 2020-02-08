@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnDSpellsCompendium.Models
+namespace DnDSpellsCompendium
 {
-	class Spellbook
+	class Spellbook : BaseModel
 	{
 		public List<Spell> LearnedSpells { get; set; }
 		public List<Spell> PreparedSpells { get; set; }

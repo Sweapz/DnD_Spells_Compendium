@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnDSpellsCompendium.Models
+namespace DnDSpellsCompendium
 {
-	class DnDClass
+	class DnDClass : BaseModel
 	{
 		public string Name { get; set; }
 		public int ClassLevel { get; set; }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DnDSpellsCompendium.Models
+namespace DnDSpellsCompendium
 {
 	public enum SpellSchool
 	{
@@ -18,7 +18,7 @@ namespace DnDSpellsCompendium.Models
 		Transmuation
 	}
 
-	public class Spell
+	public class Spell : BaseModel
 	{
 		public string Name { get; set; }
 		public string Description { get; set; }
