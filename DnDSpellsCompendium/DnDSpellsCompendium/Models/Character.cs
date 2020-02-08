@@ -12,6 +12,5 @@ namespace DnDSpellsCompendium.Models
 		public int TotalLevel { get; set; }
 		public List<DnDClass> Classes { get; set; }
 
-
 	}
 }

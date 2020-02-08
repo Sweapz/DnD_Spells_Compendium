@@ -1,11 +1,10 @@
 ﻿using PropertyChanged;
 using System.ComponentModel;
 
-
-namespace DnDSpellsCompendium.ViewModels
+namespace DnDSpellsCompendium.Models
 {
 	[AddINotifyPropertyChangedInterface]
-	public class BaseViewModel : INotifyPropertyChanged
+	public class BaseModel : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
 	}
