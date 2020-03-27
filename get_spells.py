@@ -19,7 +19,7 @@ def get_spell_info_from_page(href):
 	def get_spell_json(data):
 		json_data = {
 			"Level": data[0],
-			"Casting time": data[1],
+			"CastingTime": data[1],
 			"Range": data[2],
 			"Components": data[3],
 			"Duration": data[4],
@@ -28,10 +28,10 @@ def get_spell_info_from_page(href):
 		}
 		
 		if(len(data) == 11):
-			json_data["Higher Level"] = data[7]
+			json_data["HigherLevel"] = data[7]
 			json_data["Classes"] = data[9]
 		else:
-			json_data["Higher Level"] = None
+			json_data["HigherLevel"] = None
 			json_data["Classes"] = data[8]
 			
 		return json_data
@@ -43,20 +43,20 @@ def get_spell_info_from_page(href):
 	strong_data = [text.get_text() for text in main_div.find_all("strong")]
 	all_p = [text.get_text().strip() for i, text in enumerate(main_div.find_all("p")) if i != 1]
 	spell_data = get_spell_json(strong_data + all_p)
+	spell_data["Name"] = main_div.find("span").get_text()
 	
-	return main_div.find("span").get_text(), spell_data
+	return spell_data
 
 def load_hrefs_from_file():
 	return pickle.load(open("spell_hrefs.p", "rb"))
 
 if __name__ == "__main__":
 	url = "https://www.dnd-spells.com/spells"
-	json_data = {}
+	json_data = list()
 	hrefs = get_all_hrefs(url)
 
 	for link in tqdm.tqdm(hrefs):
-		name, spell_data = get_spell_info_from_page(link)
-		json_data[name] = spell_data
+		json_data.append(get_spell_info_from_page(link))
 
 	with open("spell_data.json", "w+") as outfile:
 		json.dump(json_data, outfile)
