@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DnDSpellsCompendium
 {
-	public class DnDClass : BaseModel
+	public class DnDClass
 	{
 		public string Name { get; set; }
 		public int ClassLevel { get; set; }

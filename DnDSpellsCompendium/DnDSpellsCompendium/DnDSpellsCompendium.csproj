@@ -64,11 +64,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Helpers\Enums.cs" />
+    <Compile Include="Helpers\JsonSpellDecoder.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\DnDClass.cs" />
     <Compile Include="Models\Spell.cs" />
     <Compile Include="Models\Spellbook.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

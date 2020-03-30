@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using DnDSpellsCompendium.Helpers;
+using DnDSpellsCompendium.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,21 +29,14 @@ namespace DnDSpellsCompendium
 		{
             List<Spell> spells = new List<Spell>();
 
-            LoadJson();
-
 			InitializeComponent();
+            this.DataContext = new MainViewModel();
+
 
 		}
 
-        public void LoadJson()
-        {
-            string path = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data\spell_data.json");
-            using (StreamReader r = new StreamReader(path))
-            {
-                string json = r.ReadToEnd();
-                List<Spell> spells = JsonConvert.DeserializeObject<List<Spell>>(json);
-                Console.WriteLine(spells);
-            }
-        }
+        
+
+        
     }
 }
