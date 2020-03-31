@@ -19,20 +19,18 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        
         <DataTemplate x:Key="spellItem">
-            <DockPanel>
-                <Grid Margin="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1.63*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Margin="0" Grid.Column="0" >
-                        <TextBlock Text="{Binding Name}" FontSize="16" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Grid.ColumnSpan="2"/>
-                        <TextBlock Text="Bard/Druid/Sorcerer/Warlock/Wizard/Ranger/Cleric/Paladin" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0" TextTrimming="CharacterEllipsis" />
+            <Grid Margin="1 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="0" Grid.Column="0" >
+                    <TextBlock Text="{Binding Name}" FontSize="15" Style="{StaticResource MaterialDesignHeadline6TextBlock}"  TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Text="Bard/Druid/Sorcerer/Warlock/Wizard/Ranger/Cleric/Paladin" FontSize="12" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0" TextTrimming="CharacterEllipsis" />
 
-                        <!--Needs to be a list of Classes displayed as above-->
-                        <!--<ListBox ItemsSource="{Binding Classes}">
+                    <!--Needs to be a list of Classes displayed as above-->
+                    <!--<ListBox ItemsSource="{Binding Classes}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding}" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0"/>
@@ -40,50 +38,45 @@
                             </ListBox.ItemTemplate>
                         </ListBox>-->
 
-                        <TextBlock Text="{Binding School}" Style="{StaticResource MaterialDesignBody1TextBlock}" Padding="0"/>
-                    </StackPanel>
-                    <Grid HorizontalAlignment="Right" Grid.Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="2*"/>
-                        </Grid.RowDefinitions>
-
-                        <!--Add Spell Button-->
+                    <TextBlock Text="{Binding School}" FontSize="13" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0"/>
+                </StackPanel>
+                <!--Add Spell Button (MIGHT NEED FOR LATER)-->
+                <!--
                         <Button HorizontalAlignment="Right" VerticalAlignment="Top"  Width="Auto" Height="Auto" Style="{StaticResource MaterialDesignIconButton}">
                             <materialDesign:PackIcon VerticalAlignment="Top" Kind="Add" Grid.Row="0"/>
-                        </Button>
+                        </Button>-->
 
-                        <StackPanel VerticalAlignment="Bottom" Grid.Row="1">
-                            <TextBlock VerticalAlignment="Bottom" Text="{Binding Level}" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0" HorizontalAlignment="Right"/>
-                            <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
-                                <materialDesign:Card Padding="1 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
-                                    <TextBlock Text="{Binding CastTime}" FontSize="13" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0" HorizontalAlignment="Right" Margin="1"/>
-                                </materialDesign:Card>
-                                <TextBlock Text="{Binding Components}" FontSize="13" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="5 0 0 0" HorizontalAlignment="Right"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-            </DockPanel>
+                <StackPanel VerticalAlignment="Bottom" Grid.Column="1" >
+                    <TextBlock Text="{Binding Components}" FontSize="13" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0" HorizontalAlignment="Right"/>
+                    <TextBlock VerticalAlignment="Bottom" Text="{Binding Level}" FontSize="13" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0" HorizontalAlignment="Right"/>
+                    <materialDesign:Card Padding="1 0" HorizontalAlignment="Right" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                        <TextBlock Text="{Binding CastTime}" FontSize="13" Style="{StaticResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Right" Margin="1"/>
+                    </materialDesign:Card>
+                </StackPanel>
+
+            </Grid>
         </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="4*"/>
-
         </Grid.ColumnDefinitions>
         <ListView
             Margin="5" 
             Name="SpellListView" 
             ItemsSource="{Binding Spells}" 
             ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-            ItemTemplate="{StaticResource spellItem}">
+            ItemTemplate="{StaticResource spellItem}"
+            Grid.Column="0" 
+            Style="{StaticResource sb}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                    <Setter Property="Margin" Value="0 1"/>
-                    <Setter Property="Padding" Value="1"/>
+                    <Setter Property="Margin" Value="0"/>
+                    <Setter Property="Padding" Value="1 0"/>
+                    <Setter Property="BorderBrush" Value="DarkGray"/>
+                    <Setter Property="BorderThickness" Value="0 1"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>
