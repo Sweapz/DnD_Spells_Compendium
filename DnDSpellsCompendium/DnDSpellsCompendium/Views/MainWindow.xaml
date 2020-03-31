@@ -68,8 +68,7 @@
             ItemsSource="{Binding Spells}" 
             ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
             ItemTemplate="{StaticResource spellItem}"
-            Grid.Column="0" 
-            Style="{StaticResource sb}">
+            Grid.Column="0">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
