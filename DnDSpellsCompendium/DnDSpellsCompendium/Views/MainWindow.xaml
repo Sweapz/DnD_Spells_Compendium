@@ -5,36 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:DnDSpellsCompendium.ViewModels"
         xmlns:local="clr-namespace:DnDSpellsCompendium"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1000" Width="1800">
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <Style TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        </Style>
+        
         <DataTemplate x:Key="spellItem">
-            <!--<StackPanel Margin="2" Orientation="Horizontal">
-                <TextBlock Text="{Binding Name}" FontSize="20" HorizontalAlignment="Left"/>
-                <TextBlock Text="{Binding Components}" TextAlignment="Right" Width="400" Background="AliceBlue"/>
-            </StackPanel>-->
+            <DockPanel>
+                <Grid Margin="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.63*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0" Grid.Column="0" >
+                        <TextBlock Text="{Binding Name}" FontSize="16" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Grid.ColumnSpan="2"/>
+                        <TextBlock Text="Bard/Druid/Sorcerer/Warlock/Wizard/Ranger/Cleric/Paladin" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0" TextTrimming="CharacterEllipsis" />
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+                        <!--Needs to be a list of Classes displayed as above-->
+                        <!--<ListBox ItemsSource="{Binding Classes}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>-->
 
-                <TextBlock Grid.Column="0" Text="{Binding Name}" FontSize="20" HorizontalAlignment="Left"/>
-                <TextBlock Grid.Column="1" Text="{Binding Components}" TextAlignment="Right" TextWrapping="Wrap"/>
-            </Grid>
+                        <TextBlock Text="{Binding School}" Style="{StaticResource MaterialDesignBody1TextBlock}" Padding="0"/>
+                    </StackPanel>
+                    <Grid HorizontalAlignment="Right" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
 
+                        <!--Add Spell Button-->
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Top"  Width="Auto" Height="Auto" Style="{StaticResource MaterialDesignIconButton}">
+                            <materialDesign:PackIcon VerticalAlignment="Top" Kind="Add" Grid.Row="0"/>
+                        </Button>
 
-
-
-
-
+                        <StackPanel VerticalAlignment="Bottom" Grid.Row="1">
+                            <TextBlock VerticalAlignment="Bottom" Text="{Binding Level}" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0" HorizontalAlignment="Right"/>
+                            <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <materialDesign:Card Padding="1 0" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                                    <TextBlock Text="{Binding CastTime}" FontSize="13" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0" HorizontalAlignment="Right" Margin="1"/>
+                                </materialDesign:Card>
+                                <TextBlock Text="{Binding Components}" FontSize="13" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="5 0 0 0" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DockPanel>
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -44,11 +74,19 @@
 
         </Grid.ColumnDefinitions>
         <ListView
-        Margin="10" 
-        Name="SpellListView" 
-        ItemsSource="{Binding Spells}" 
-        ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-        ItemTemplate="{StaticResource spellItem}"/>
+            Margin="5" 
+            Name="SpellListView" 
+            ItemsSource="{Binding Spells}" 
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+            ItemTemplate="{StaticResource spellItem}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    <Setter Property="Margin" Value="0 1"/>
+                    <Setter Property="Padding" Value="1"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
     </Grid>
 
 

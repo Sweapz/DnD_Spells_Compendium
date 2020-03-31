@@ -60,7 +60,8 @@ namespace DnDSpellsCompendium.Helpers
             return spellDictionary.ContainsKey("HigherLevel") ?
                 new Spell(
                     spellDictionary["Name"],
-                    spellDictionary["Description"],
+                    spellDictionary["Description"], 
+                    spellDictionary["Level"],
                     spellDictionary["Range"],
                     spellDictionary["Components"],
                     spellDictionary["Duration"],
@@ -71,6 +72,7 @@ namespace DnDSpellsCompendium.Helpers
                 new Spell(
                     spellDictionary["Name"],
                     spellDictionary["Description"],
+                    spellDictionary["Level"],
                     spellDictionary["Range"],
                     spellDictionary["Components"],
                     spellDictionary["Duration"],
