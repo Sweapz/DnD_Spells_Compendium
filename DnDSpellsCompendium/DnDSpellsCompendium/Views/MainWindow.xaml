@@ -10,20 +10,48 @@
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+        <DataTemplate x:Key="spellItem">
+            <!--<StackPanel Margin="2" Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" FontSize="20" HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding Components}" TextAlignment="Right" Width="400" Background="AliceBlue"/>
+            </StackPanel>-->
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="{Binding Name}" FontSize="20" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Column="1" Text="{Binding Components}" TextAlignment="Right" TextWrapping="Wrap"/>
+            </Grid>
+
+
+
+
+
+
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <ListView Margin="10,10,0,0" Name="SpellListView" HorizontalAlignment="Left" VerticalAlignment="Top" ItemsSource="{Binding Spells}" Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Margin="2">
-                        <TextBlock Text="{Binding Name}" FontSize="20"/>
-                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            <ColumnDefinition Width="4*"/>
 
+        </Grid.ColumnDefinitions>
+        <ListView
+        Margin="10" 
+        Name="SpellListView" 
+        ItemsSource="{Binding Spells}" 
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+        ItemTemplate="{StaticResource spellItem}"/>
     </Grid>
+
+
+
+
 </Window>
