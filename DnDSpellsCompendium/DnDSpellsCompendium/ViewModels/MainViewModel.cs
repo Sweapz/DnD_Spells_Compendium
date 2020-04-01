@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace DnDSpellsCompendium.ViewModels
@@ -12,9 +13,11 @@ namespace DnDSpellsCompendium.ViewModels
     public class MainViewModel : BaseViewModel
     {
         public List<Spell> Spells { get; set; }
+        public Spell CurrentActiveSpell { get; set; }
         public MainViewModel()
         {
             Spells = LoadJson();
+            CurrentActiveSpell = Spells[0];
         }
 
         public List<Spell> LoadJson()

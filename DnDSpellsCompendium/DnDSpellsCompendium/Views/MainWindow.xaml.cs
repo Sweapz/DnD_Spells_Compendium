@@ -27,10 +27,9 @@ namespace DnDSpellsCompendium
 	{
 		public MainWindow()
 		{
-            List<Spell> spells = new List<Spell>();
-
+			this.DataContext = new MainViewModel();
 			InitializeComponent();
-            this.DataContext = new MainViewModel();
+            
 
         }
 
