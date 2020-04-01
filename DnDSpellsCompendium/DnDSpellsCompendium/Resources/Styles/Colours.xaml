@@ -1,5 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:DnDSpellsCompendium">
-    
+
+    <Color x:Key="BackgroundLight">#36393f</Color>
+    <SolidColorBrush x:Key="BackgroundLightBrush" Color="{StaticResource BackgroundLight}"/>
+
+    <Color x:Key="BackgroundMedium">#2E3135</Color>
+    <SolidColorBrush x:Key="BackgroundMediumBrush" Color="{StaticResource BackgroundMedium}"/>
+
+    <Color x:Key="BackgroundDark">#1E2123</Color>
+    <SolidColorBrush x:Key="BackgroundDarkBrush" Color="{StaticResource BackgroundDark}"/>
+
+    <Color x:Key="TextColor">#dfdfdf</Color>
+    <SolidColorBrush x:Key="TextColorBrush" Color="{StaticResource TextColor}"/>
+
+
 </ResourceDictionary>
