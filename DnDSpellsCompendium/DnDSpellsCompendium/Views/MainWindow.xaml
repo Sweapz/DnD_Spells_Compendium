@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:DnDSpellsCompendium.ViewModels"
         xmlns:helpers="clr-namespace:DnDSpellsCompendium.Helpers"
+        xmlns:resources="clr-namespace:DnDSpellsCompendium.Resources"
+        xmlns:controls="clr-namespace:DnDSpellsCompendium.Controls"
+        
         xmlns:local="clr-namespace:DnDSpellsCompendium"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
@@ -14,11 +17,11 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="{StaticResource BackgroundMediumBrush}"
+        Background="{StaticResource BackgroundDarkBrush}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         
         
-        Icon="Icon.png"
+        Icon="/Images/Logo/Icon.png"
         WindowStartupLocation="CenterScreen"
         Title="DnD Spells Compendium - A DnD Spell and Class Tracker" Height="1000" Width="1800" Topmost="True" MinHeight="1000" MinWidth="1800">
     <Window.DataContext>
@@ -26,7 +29,8 @@
     </Window.DataContext>
     <Window.Resources>
         <helpers:ListToStringConverter x:Key="ListToStringConverter"/>
-        
+        <resources:SpellListItem x:Key="SpellListItem"/>
+
         <DataTemplate x:Key="spellItem">
             <Grid Margin="0">
                 <Grid.ColumnDefinitions>
@@ -69,14 +73,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
-            <ListView
+            <!--<ListView
                 Name="SpellListView" 
                 ItemsSource="{Binding Spells}" 
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                ItemTemplate="{StaticResource spellItem}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                 Grid.Column="0"
+                ItemTemplate="{StaticResource NewTemplateSpell}"
                 >
-               
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -87,7 +90,28 @@
                     </Style>
                     
                 </ListView.ItemContainerStyle>
-            </ListView>
+            </ListView>-->
+
+            <controls:SpellListControl Grid.Column="0">
+                <ListView
+                    ItemsSource="{Binding Spells}" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    Grid.Column="0"
+                    ItemTemplate="{StaticResource NewTemplateSpell}"
+                    >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Margin" Value="1 0 5 0"/>
+                            <Setter Property="Padding" Value="1 0"/>
+                            <Setter Property="BorderBrush" Value="{StaticResource BackgroundLightBrush}"/>
+                            <Setter Property="BorderThickness" Value="0 1"/>
+                        </Style>
+
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </controls:SpellListControl>
+
             <DockPanel Background="{StaticResource BackgroundLightBrush}" Grid.Column="1">
                 <TextBlock Text="{Binding SelectedItem.Name, ElementName=SpellListView}" Style="{StaticResource TextStyleActiveTitle}" DockPanel.Dock="Top"/>
                 <TextBlock 

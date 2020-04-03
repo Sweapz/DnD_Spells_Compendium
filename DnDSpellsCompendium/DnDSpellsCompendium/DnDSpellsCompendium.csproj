@@ -73,6 +73,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\SpellListControl.xaml.cs">
+      <DependentUpon>SpellListControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\JsonSpellDecoder.cs" />
     <Compile Include="Helpers\ListToStringConverter.cs" />
@@ -80,9 +83,24 @@
     <Compile Include="Models\DnDClass.cs" />
     <Compile Include="Models\Spell.cs" />
     <Compile Include="Models\Spellbook.cs" />
+    <Compile Include="Resources\SpellListItem.xaml.cs">
+      <DependentUpon>SpellListItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
+    <Page Include="Controls\SpellListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\SpellListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\SpellListItem_1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles\Scrollbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,7 +144,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Resource Include="Views\Icon.png" />
     <Resource Include="Images\Logo\Icon.ico" />
     <Resource Include="Images\Logo\Icon.png" />
     <EmbeddedResource Include="Properties\Resources.resx">

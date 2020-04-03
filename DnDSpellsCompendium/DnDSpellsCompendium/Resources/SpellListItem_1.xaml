@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:DnDSpellsCompendium.Resources"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    
+                    xmlns:helpers="clr-namespace:DnDSpellsCompendium.Helpers">
+    <helpers:ListToStringConverter x:Key="ListToStringConverter"/>
+
+    <DataTemplate x:Name="NewTemplateSpell" x:Key="NewTemplateSpell">
+        <Grid Margin="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="0" Grid.Column="0" >
+                <TextBlock Text="{Binding Name}" Style="{StaticResource TextStyleListTitle}"/>
+                <TextBlock Text="{Binding Classes, Converter={StaticResource ListToStringConverter}}" Style="{StaticResource TextStyleListSmall}" Padding="0"/>
+
+
+                <TextBlock Text="{Binding School}" Style="{StaticResource TextStyleListMedium}" Padding="0"/>
+            </StackPanel>
+            <!--Add Spell Button (MIGHT NEED FOR LATER)-->
+            <!--
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Top"  Width="Auto" Height="Auto" Style="{StaticResource MaterialDesignIconButton}">
+                            <materialDesign:PackIcon VerticalAlignment="Top" Kind="Add" Grid.Row="0"/>
+                        </Button>-->
+
+            <StackPanel VerticalAlignment="Bottom" Grid.Column="1" >
+                <TextBlock Text="{Binding Components}" Style="{StaticResource TextStyleListMedium}" Padding="0" HorizontalAlignment="Right"/>
+                <TextBlock VerticalAlignment="Bottom" Text="{Binding Level}" Style="{StaticResource TextStyleListMedium}" Padding="0" HorizontalAlignment="Right"/>
+                <materialDesign:Card Padding="1 0" HorizontalAlignment="Right" materialDesign:ShadowAssist.ShadowDepth="Depth1" Background="{StaticResource BackgroundDarkBrush}">
+                    <TextBlock Text="{Binding CastTime}" Style="{StaticResource TextStyleListMedium}" HorizontalAlignment="Right" Margin="1"/>
+                </materialDesign:Card>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

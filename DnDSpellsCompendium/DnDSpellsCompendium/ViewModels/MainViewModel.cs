@@ -13,19 +13,12 @@ namespace DnDSpellsCompendium.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        public RelayCommand<Spell> ChooseNewSpellCommand
-        {
-            get;
-            private set;
-        }
         public ObservableCollection<Spell> Spells { get; set; }
         public Spell CurrentActiveSpell { get; set; }
         public MainViewModel()
         {
             Spells = LoadJson();
             CurrentActiveSpell = Spells[0];
-
-            ChooseNewSpellCommand = new RelayCommand<Spell>(x => ExecuteChooseNewSpellCommand(x));
         }
 
         public ObservableCollection<Spell> LoadJson()
