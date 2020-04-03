@@ -75,6 +75,7 @@
     </ApplicationDefinition>
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\JsonSpellDecoder.cs" />
+    <Compile Include="Helpers\ListToStringConverter.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\DnDClass.cs" />
     <Compile Include="Models\Spell.cs" />

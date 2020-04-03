@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,13 +11,13 @@ namespace DnDSpellsCompendium.Helpers
 {
     public class JsonSpellDecoder
     {
-        public static List<Spell> GetSpellsFromJsonFile(string path)
+        public static ObservableCollection<Spell> GetSpellsFromJsonFile(string path)
         {
             StreamReader streamReader = new StreamReader(path);
 
             JsonTextReader reader = new JsonTextReader(new StringReader(streamReader.ReadToEnd()));
 
-            List<Spell> spells = new List<Spell>();
+            ObservableCollection<Spell> spells = new ObservableCollection<Spell>();
 
 
             while (reader.Read())

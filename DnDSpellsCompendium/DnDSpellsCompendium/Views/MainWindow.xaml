@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:DnDSpellsCompendium.ViewModels"
+        xmlns:helpers="clr-namespace:DnDSpellsCompendium.Helpers"
         xmlns:local="clr-namespace:DnDSpellsCompendium"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
@@ -24,6 +25,8 @@
         <viewModel:MainViewModel/>
     </Window.DataContext>
     <Window.Resources>
+        <helpers:ListToStringConverter x:Key="ListToStringConverter"/>
+        
         <DataTemplate x:Key="spellItem">
             <Grid Margin="0">
                 <Grid.ColumnDefinitions>
@@ -32,16 +35,8 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Margin="0" Grid.Column="0" >
                     <TextBlock Text="{Binding Name}" Style="{StaticResource TextStyleListTitle}"/>
-                    <TextBlock Text="Bard/Druid/Sorcerer/Warlock/Wizard/Ranger/Cleric/Paladin" Style="{StaticResource TextStyleListSmall}" Padding="0"/>
+                    <TextBlock Text="{Binding Classes, Converter={StaticResource ListToStringConverter}}" Style="{StaticResource TextStyleListSmall}" Padding="0"/>
 
-                    <!--Needs to be a list of Classes displayed as above-->
-                    <!--<ListBox ItemsSource="{Binding Classes}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}" Style="{StaticResource MaterialDesignBody2TextBlock}" Padding="0"/>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>-->
 
                     <TextBlock Text="{Binding School}" Style="{StaticResource TextStyleListMedium}" Padding="0"/>
                 </StackPanel>
@@ -79,7 +74,9 @@
                 ItemsSource="{Binding Spells}" 
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                 ItemTemplate="{StaticResource spellItem}"
-                Grid.Column="0">
+                Grid.Column="0"
+                >
+               
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -88,10 +85,18 @@
                         <Setter Property="BorderBrush" Value="{StaticResource BackgroundLightBrush}"/>
                         <Setter Property="BorderThickness" Value="0 1"/>
                     </Style>
+                    
                 </ListView.ItemContainerStyle>
             </ListView>
             <DockPanel Background="{StaticResource BackgroundLightBrush}" Grid.Column="1">
-                <TextBlock Text="{Binding CurrentActiveSpell.Name}" Style="{StaticResource TextStyleListTitle}"/>
+                <TextBlock Text="{Binding SelectedItem.Name, ElementName=SpellListView}" Style="{StaticResource TextStyleActiveTitle}" DockPanel.Dock="Top"/>
+                <TextBlock 
+                    Text="{Binding SelectedItem.Description, 
+                    ElementName=SpellListView}" 
+                    Style="{StaticResource TextStyleListMedium}" 
+                    DockPanel.Dock="Bottom"
+                    TextWrapping="Wrap"/>
+
             </DockPanel>
         </Grid>
     </Grid>
