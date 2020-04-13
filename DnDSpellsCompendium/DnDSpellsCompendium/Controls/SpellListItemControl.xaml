@@ -1,15 +1,15 @@
-﻿<UserControl    x:Class="DnDSpellsCompendium.Resources.SpellListItem"
+﻿<UserControl    x:Class="DnDSpellsCompendium.Controls.SpellListItemControl"
                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:local="clr-namespace:DnDSpellsCompendium.Resources"
+                xmlns:local="clr-namespace:DnDSpellsCompendium.Controls"
                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                 xmlns:helpers="clr-namespace:DnDSpellsCompendium.Helpers">
     <UserControl.Resources>
         <helpers:ListToStringConverter x:Key="ListToStringConverter"/>
-        <Style x:Name="SpellListItem" TargetType="{x:Type ListView}">
-            <Setter Property="ItemTemplate">
+        <Style x:Key="SpellListItem" TargetType="{x:Type ContentControl}">
+            <Setter Property="Template">
                 <Setter.Value>
-                    <DataTemplate>
+                    <ControlTemplate TargetType="{x:Type ContentControl}">
                         <Grid Margin="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2.3*"/>
@@ -36,11 +36,11 @@
                                 </materialDesign:Card>
                             </StackPanel>
                         </Grid>
-                    </DataTemplate>
-                        
-                    
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
     </UserControl.Resources>
+
+    <ContentControl Style="{StaticResource SpellListItem}"/>
 </UserControl>

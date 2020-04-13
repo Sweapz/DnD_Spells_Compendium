@@ -83,8 +83,9 @@
     <Compile Include="Models\DnDClass.cs" />
     <Compile Include="Models\Spell.cs" />
     <Compile Include="Models\Spellbook.cs" />
-    <Compile Include="Resources\SpellListItem.xaml.cs">
-      <DependentUpon>SpellListItem.xaml</DependentUpon>
+    <Compile Include="Controls\SpellListItemControl.xaml.cs">
+      <DependentUpon>SpellListItemControl.xaml</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -93,13 +94,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\SpellListItem.xaml">
+    <Page Include="Controls\SpellListItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\SpellListItem_1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Resources\Styles\Scrollbar.xaml">
       <SubType>Designer</SubType>

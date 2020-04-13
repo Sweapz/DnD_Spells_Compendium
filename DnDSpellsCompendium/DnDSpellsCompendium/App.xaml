@@ -9,8 +9,7 @@
                 <ResourceDictionary Source="Resources/Styles/Colours.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Texts.xaml"/>
-                <ResourceDictionary Source="Resources/SpellListItem_1.xaml"/>
-
+                
 
 
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />

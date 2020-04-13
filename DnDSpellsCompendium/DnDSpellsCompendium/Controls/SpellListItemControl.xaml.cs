@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DnDSpellsCompendium.Resources
+namespace DnDSpellsCompendium.Controls
 {
     /// <summary>
     /// Interaction logic for SpellListItem.xaml
     /// </summary>
-    public partial class SpellListItem : UserControl
+    public partial class SpellListItemControl : UserControl
     {
-        public SpellListItem()
+        public SpellListItemControl()
         {
             InitializeComponent();
         }
