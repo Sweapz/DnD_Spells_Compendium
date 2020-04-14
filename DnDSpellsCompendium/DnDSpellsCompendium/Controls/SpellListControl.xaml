@@ -34,8 +34,19 @@
                             </Button>
                         </Grid>
                         <StackPanel Orientation="Horizontal" Margin="3" Grid.Row="1">
-                            <ComboBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 0 10 0">Hi there mister fatberg</ComboBox>
-                            <ComboBox VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 0 10 0">Hi there mister fatberg</ComboBox>
+                            <ComboBox 
+                                ItemsSource="{Binding Classes}" 
+                                Foreground="{StaticResource TextColorBrush}" 
+                                VerticalAlignment="Center" HorizontalAlignment="Stretch" 
+                                Margin="0 0 10 0" SelectedIndex="0" SelectedValue="{Binding ClassValue, Mode=OneWayToSource}"/>
+
+
+
+                            <ComboBox
+                                ItemsSource="{Binding Levels}" 
+                                Foreground="{StaticResource TextColorBrush}"
+                                VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 0 10 0"
+                                SelectedIndex="0" SelectedValue="{Binding SpellLevel, Mode=OneWayToSource}"></ComboBox>
                         </StackPanel>
                     </Grid>
 
