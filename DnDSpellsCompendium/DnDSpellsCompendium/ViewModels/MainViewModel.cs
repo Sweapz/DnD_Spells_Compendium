@@ -98,12 +98,20 @@ namespace DnDSpellsCompendium.ViewModels
         private ObservableCollection<Spell> FilterSpells()
         {
             IEnumerable<Spell> tempSpells;
+            //Func<string, Type, string, Func<string>, IEnumerable<Spell>, IEnumerable<Spell>> find = 
+            //    (
+            //        (defaultValue, t, property, cmp, inputList) => 
+            //        inputList.Where(x => ((t)x.GetType().GetProperty(property).GetMethod(cmp).Invoke())
+
+
 
             // Search parameter
             tempSpells = _allSpells.Where(x => x.Name.ToLower().Contains(_searchText.ToLower()));
 
             // Class filter
             tempSpells = ClassValue != "Classes" ? tempSpells.Where(x => x.Classes.Contains((Class)Enum.Parse(typeof(Class), _classValue))) : tempSpells;
+            tempSpells = ClassValue != "Classes" ? tempSpells.Where(x => (bool)typeof(List<Class>).GetMethod("Contains").Invoke((List<Class>)x.GetType().GetProperty("Classes").GetValue(x), new[] { Enum.Parse(typeof(Class), _classValue) })) : tempSpells;
+
 
             // Level filter
             tempSpells = SpellLevel != "Spell Level" ? tempSpells.Where(x => x.Level.Equals(SpellLevel)) : tempSpells;
