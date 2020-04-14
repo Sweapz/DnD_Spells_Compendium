@@ -60,29 +60,32 @@
                     
                 </ListView.ItemContainerStyle>
             </ListView>-->
-
-            <controls:SpellListControl Grid.Column="0">
-                <ScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ItemsControl ItemsSource="{Binding Spells}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <controls:SpellListItemControl/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
+            <controls:SpellListControl x:Name="SpellController">
+                <ListView ItemsSource="{Binding TrueSpells}" x:Uid="SpellControllerListView">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <controls:SpellListItemControl/>
+                        </DataTemplate>
+                        
+                    </ListView.ItemTemplate>
+                </ListView>
             </controls:SpellListControl>
+                
 
-            <!--<DockPanel Background="{StaticResource BackgroundLightBrush}" Grid.Column="1">
-                <TextBlock Text="{Binding SelectedItem.Name, ElementName=SpellListView}" Style="{StaticResource TextStyleActiveTitle}" DockPanel.Dock="Top"/>
+            <DockPanel Background="{StaticResource BackgroundLightBrush}" Grid.Column="1">
+                <TextBlock Text="{Binding ElementName=SpellController, Path=Content.SelectedItem.Name}" Style="{StaticResource TextStyleActiveTitle}" DockPanel.Dock="Top"/>
                 <TextBlock 
-                    Text="{Binding SelectedItem.Description, 
-                    ElementName=SpellListView}" 
+                    Text="{Binding ElementName=SpellController, Path=Content.SelectedItem.Description}" 
                     Style="{StaticResource TextStyleListMedium}" 
                     DockPanel.Dock="Bottom"
                     TextWrapping="Wrap"/>
 
-            </DockPanel>-->
+            </DockPanel>
         </Grid>
     </Grid>
 

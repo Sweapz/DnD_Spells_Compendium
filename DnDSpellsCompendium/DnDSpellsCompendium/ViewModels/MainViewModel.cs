@@ -13,12 +13,26 @@ namespace DnDSpellsCompendium.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        public ObservableCollection<Spell> Spells { get; set; }
+        public ObservableCollection<SpellListItemViewModel> Spells { get; set; }
+        public ObservableCollection<Spell> TrueSpells { get; set; }
         public Spell CurrentActiveSpell { get; set; }
         public MainViewModel()
         {
-            Spells = LoadJson();
-            CurrentActiveSpell = Spells[0];
+            TrueSpells = LoadJson();
+            Spells = ConvertSpellToSpellItemViewModel(LoadJson());
+            CurrentActiveSpell = Spells[0].SpellItem;
+        }
+
+        private ObservableCollection<SpellListItemViewModel> ConvertSpellToSpellItemViewModel(ObservableCollection<Spell> spells)
+        {
+            var spellListItemViewModels = new ObservableCollection<SpellListItemViewModel>();
+
+            foreach (var spell in spells)
+            {
+                spellListItemViewModels.Add(new SpellListItemViewModel(spell));
+            }
+            spellListItemViewModels[0].IsSelected = true;
+            return spellListItemViewModels;
         }
 
         public ObservableCollection<Spell> LoadJson()
