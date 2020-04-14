@@ -13,26 +13,40 @@ namespace DnDSpellsCompendium.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        public ObservableCollection<SpellListItemViewModel> Spells { get; set; }
-        public ObservableCollection<Spell> TrueSpells { get; set; }
-        public Spell CurrentActiveSpell { get; set; }
-        public MainViewModel()
+        private ObservableCollection<Spell> _allSpells;
+        private ObservableCollection<Spell> _spells;
+
+        public ObservableCollection<Spell> Spells
         {
-            TrueSpells = LoadJson();
-            Spells = ConvertSpellToSpellItemViewModel(LoadJson());
-            CurrentActiveSpell = Spells[0].SpellItem;
+            get { return _spells; }
+            set
+            {
+                _spells = value;
+                ActiveSpell = _spells.First();
+            }
         }
 
-        private ObservableCollection<SpellListItemViewModel> ConvertSpellToSpellItemViewModel(ObservableCollection<Spell> spells)
-        {
-            var spellListItemViewModels = new ObservableCollection<SpellListItemViewModel>();
 
-            foreach (var spell in spells)
+        public Spell ActiveSpell { get; set; }
+
+        private string _searchText;
+        public string SearchText
+        {
+            get { return _searchText; }
+            set
             {
-                spellListItemViewModels.Add(new SpellListItemViewModel(spell));
+                if (value != _searchText)
+                {
+                    _searchText = value;
+                    Spells = new ObservableCollection<Spell>(_allSpells.Where(x => x.Name.ToLower().Contains(_searchText.ToLower())));
+                }
             }
-            spellListItemViewModels[0].IsSelected = true;
-            return spellListItemViewModels;
+        }
+        public MainViewModel()
+        {
+            _allSpells = LoadJson();
+            Spells = new ObservableCollection<Spell>(_allSpells);
+            
         }
 
         public ObservableCollection<Spell> LoadJson()
@@ -40,16 +54,6 @@ namespace DnDSpellsCompendium.ViewModels
             string path = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data\spell_data.json");
 
             return JsonSpellDecoder.GetSpellsFromJsonFile(path);
-        }
-
-        public void OnItemSelectedHandler(object sender, MouseButtonEventHandler e)
-        {
-            Console.WriteLine("Aids");
-        }
-
-        private void ExecuteChooseNewSpellCommand(Spell spell)
-        {
-            CurrentActiveSpell = spell;
         }
     }
 }

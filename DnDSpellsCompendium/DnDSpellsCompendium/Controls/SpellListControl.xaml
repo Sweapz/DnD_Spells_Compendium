@@ -28,7 +28,7 @@
                                 <ColumnDefinition Width="7*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Background="{StaticResource BackgroundLightBrush}" Margin="3" Foreground="{StaticResource TextColorBrush}" VerticalAlignment="Center" Grid.Column="0"/>
+                            <TextBox PreviewKeyDown="TextBox_PreviewKeyDown" Background="{StaticResource BackgroundLightBrush}" Margin="3" Foreground="{StaticResource TextColorBrush}" VerticalAlignment="Center" Grid.Column="0"/>
                             <Button HorizontalAlignment="Center" VerticalAlignment="Center"  Width="Auto" Height="Auto" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="1">
                                 <materialDesign:PackIcon  Kind="ArrowDropDownCircle" />
                             </Button>

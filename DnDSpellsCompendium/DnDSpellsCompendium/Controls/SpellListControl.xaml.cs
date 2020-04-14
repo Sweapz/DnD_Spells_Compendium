@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DnDSpellsCompendium.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace DnDSpellsCompendium.Controls
         public SpellListControl()
         {
             InitializeComponent();
+
+            
+        }
+
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var mainViewModel = (sender as TextBox).DataContext as MainViewModel;
+                mainViewModel.SearchText = (sender as TextBox).Text;
+            }
         }
     }
 }

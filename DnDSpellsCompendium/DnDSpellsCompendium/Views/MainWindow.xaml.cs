@@ -29,7 +29,6 @@ namespace DnDSpellsCompendium
 		{
 			this.DataContext = new MainViewModel();
 			InitializeComponent();
-            
 
         }
 
