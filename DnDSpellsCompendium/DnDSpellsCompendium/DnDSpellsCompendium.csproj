@@ -79,9 +79,7 @@
     <Compile Include="Controls\SpellListControl.xaml.cs">
       <DependentUpon>SpellListControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CheckBoxStatus.cs" />
     <Compile Include="Helpers\Enums.cs" />
-    <Compile Include="Helpers\Filter.cs" />
     <Compile Include="Helpers\InverseBooleanConverter.cs" />
     <Compile Include="Helpers\JsonSpellDecoder.cs" />
     <Compile Include="Helpers\ListToStringConverter.cs" />
