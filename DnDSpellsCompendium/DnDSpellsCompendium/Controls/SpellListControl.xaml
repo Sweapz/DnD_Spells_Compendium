@@ -5,15 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DnDSpellsCompendium.Controls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             
+             xmlns:helpers="clr-namespace:DnDSpellsCompendium.Helpers"             
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="300">
+    <UserControl.Resources>
+        <helpers:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+    </UserControl.Resources>
     <UserControl.Template>
         <ControlTemplate TargetType="UserControl">
             <Border Background="{StaticResource BackgroundMediumBrush}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="1.2*"/>
                         <RowDefinition Height="10*"/>
                     </Grid.RowDefinitions>
 
@@ -21,35 +24,62 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="7*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox PreviewKeyDown="TextBox_PreviewKeyDown" Background="{StaticResource BackgroundLightBrush}" Margin="3" Foreground="{StaticResource TextColorBrush}" VerticalAlignment="Center" Grid.Column="0"/>
-                            <Button HorizontalAlignment="Center" VerticalAlignment="Center"  Width="Auto" Height="Auto" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="1">
-                                <materialDesign:PackIcon  Kind="ArrowDropDownCircle" />
-                            </Button>
+                            <TextBox PreviewKeyDown="TextBox_PreviewKeyDown" Background="{StaticResource BackgroundLightBrush}" Margin="3" Foreground="{StaticResource TextColorBrush}" VerticalAlignment="Center"/>
                         </Grid>
-                        <StackPanel Orientation="Horizontal" Margin="3" Grid.Row="1">
-                            <ComboBox 
+
+
+                        <DockPanel Grid.Row="1" HorizontalAlignment="Stretch">
+                            <TextBlock HorizontalAlignment="Left" Text="Concentration" Foreground="{StaticResource TextColorBrush}" VerticalAlignment="Center" Margin="2"/>
+                            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0 0 100 0">
+                                <CheckBox Content="All" Foreground="{StaticResource TextColorBrush}" Margin="2" IsChecked="{Binding ConcentrationCheckBoxAll, Mode=TwoWay}" IsEnabled="{Binding ConcentrationCheckBoxAll, Converter={StaticResource InverseBooleanConverter}}"/>
+                                <CheckBox Content="No" Foreground="{StaticResource TextColorBrush}" Margin="2" IsChecked="{Binding ConcentrationCheckBoxNo, Mode=TwoWay}" IsEnabled="{Binding ConcentrationCheckBoxNo, Converter={StaticResource InverseBooleanConverter}}"/>
+                                <CheckBox Content="Yes" Foreground="{StaticResource TextColorBrush}" Margin="2" IsChecked="{Binding ConcentrationCheckBoxYes, Mode=TwoWay}" IsEnabled="{Binding ConcentrationCheckBoxYes, Converter={StaticResource InverseBooleanConverter}}"/>
+                            </StackPanel>
+
+                        </DockPanel>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.3*"/>
+                                <ColumnDefinition Width="1.2*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox
+                                Grid.Column="0"          
                                 ItemsSource="{Binding Classes}" 
                                 Foreground="{StaticResource TextColorBrush}" 
                                 VerticalAlignment="Center" HorizontalAlignment="Stretch" 
-                                Margin="0 0 10 0" SelectedIndex="0" SelectedValue="{Binding ClassValue, Mode=OneWayToSource}"/>
-
-
-
+                                Margin="2" SelectedIndex="0" SelectedValue="{Binding ClassValue, Mode=OneWayToSource}"/>
                             <ComboBox
+                                Grid.Column="1"
                                 ItemsSource="{Binding Levels}" 
                                 Foreground="{StaticResource TextColorBrush}"
-                                VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0 0 10 0"
+                                VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="2"
                                 SelectedIndex="0" SelectedValue="{Binding SpellLevel, Mode=OneWayToSource}"></ComboBox>
-                        </StackPanel>
-                    </Grid>
 
+                            <ComboBox
+                                Grid.Column="2"
+                                ItemsSource="{Binding Schools}" 
+                                Foreground="{StaticResource TextColorBrush}"
+                                VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="2"
+                                SelectedIndex="0" SelectedValue="{Binding SchoolValue, Mode=OneWayToSource}"></ComboBox>
+
+                            <ComboBox
+                                Grid.Column="3"
+                                ItemsSource="{Binding CastingTimes}" 
+                                Foreground="{StaticResource TextColorBrush}"
+                                VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="2"
+                                SelectedIndex="0" SelectedValue="{Binding CastingValue, Mode=OneWayToSource}"></ComboBox>
+
+                            
+                        </Grid>
+                        
+                    </Grid>
                     <ContentPresenter Grid.Row="1"/>
                 </Grid>
             </Border>

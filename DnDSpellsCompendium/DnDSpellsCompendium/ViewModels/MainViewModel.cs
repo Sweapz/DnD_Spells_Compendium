@@ -13,10 +13,69 @@ namespace DnDSpellsCompendium.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private ObservableCollection<Spell> _allSpells;
-        private ObservableCollection<Spell> _spells;
+        #region Filtering
 
+        #region CheckBoxConcentration
+        private bool _concentrationCheckBoxNo = false;
+
+        public bool ConcentrationCheckBoxNo
+        {
+            get { return _concentrationCheckBoxNo; }
+            set
+            {
+                _concentrationCheckBoxNo = value;
+                if (value)
+                {
+                    ConcentrationCheckBoxAll = false;
+                    ConcentrationCheckBoxYes = false;
+                    Spells = FilterSpells();
+                }
+            }
+        }
+
+        private bool _concentrationCheckBoxYes = false;
+
+        public bool ConcentrationCheckBoxYes
+        {
+            get { return _concentrationCheckBoxYes; }
+            set
+            {
+                _concentrationCheckBoxYes = value;
+                if (value)
+                {
+                    ConcentrationCheckBoxAll = false;
+                    ConcentrationCheckBoxNo = false;
+                    Spells = FilterSpells();
+                }
+            }
+        }
+
+        private bool _concentrationCheckBoxAll = true;
+
+        public bool ConcentrationCheckBoxAll
+        {
+            get { return _concentrationCheckBoxAll; }
+            set
+            {
+                _concentrationCheckBoxAll = value;
+                if (value)
+                {
+                    ConcentrationCheckBoxNo = false;
+                    ConcentrationCheckBoxYes = false;
+                    Spells = FilterSpells();
+                }
+            }
+        }
+
+        #endregion
         public ObservableCollection<string> Classes { get; set; }
+        public ObservableCollection<string> Schools { get; set; }
+
+        public ObservableCollection<string> CastingTimes { get; set; } = new ObservableCollection<string>
+        {
+            "Casting Time", "Action", "Bonus Action",
+            "Reaction", "Minute", "Hour"
+        };
         public ObservableCollection<string> Levels { get; set; } = new ObservableCollection<string>
         {
             "Spell Level", "Cantrip", "1st level",
@@ -25,15 +84,8 @@ namespace DnDSpellsCompendium.ViewModels
             "8th level", "9th level"
         };
 
-        public ObservableCollection<Spell> Spells
-        {
-            get { return _spells; }
-            set
-            {
-                _spells = value;
-                ActiveSpell = _spells.Count == 0 ? null : _spells.First();
-            }
-        }
+
+        
         private string _classValue;
         public string ClassValue
         {
@@ -58,7 +110,31 @@ namespace DnDSpellsCompendium.ViewModels
             }
         }
 
-        public Spell ActiveSpell { get; set; }
+        private string _schoolValue;
+
+        public string SchoolValue
+        {
+            get { return _schoolValue; }
+            set
+            {
+                _schoolValue = value;
+                Spells = FilterSpells();
+
+            }
+        }
+
+        private string _castingValue;
+
+        public string CastingValue
+        {
+            get { return _castingValue; }
+            set
+            {
+                _castingValue = value;
+                Spells = FilterSpells();
+            }
+        }
+
 
         private string _searchText = "";
         public string SearchText
@@ -73,19 +149,49 @@ namespace DnDSpellsCompendium.ViewModels
                 }
             }
         }
+
+        #endregion
+
+        public Spell ActiveSpell { get; set; }
+
+        private ObservableCollection<Spell> _allSpells;
+        private ObservableCollection<Spell> _spells;
+
+        public ObservableCollection<Spell> Spells
+        {
+            get { return _spells; }
+            set
+            {
+                _spells = value;
+                ActiveSpell = _spells.Count == 0 ? null : _spells.First();
+            }
+        }
         public MainViewModel()
         {
             _allSpells = LoadJson();
             Spells = new ObservableCollection<Spell>(_allSpells);
 
-            Classes = new ObservableCollection<string>();
-            Classes.Add("Classes");
+            Schools = new ObservableCollection<string>
+            {
+                "Schools"
+            };
+
+            Classes = new ObservableCollection<string>
+            {
+                "Classes"
+            };
 
             foreach (var item in Enum.GetValues(typeof(Class)))
             {
                 Classes.Add(item.ToString());
             }
-            
+
+            foreach (var item in Enum.GetValues(typeof(SpellSchool)))
+            {
+                Schools.Add(item.ToString());
+            }
+
+            //ConcentrationCheckBox = new CheckBoxStatus(true, false, false);
         }
 
         public ObservableCollection<Spell> LoadJson()
@@ -98,26 +204,29 @@ namespace DnDSpellsCompendium.ViewModels
         private ObservableCollection<Spell> FilterSpells()
         {
             IEnumerable<Spell> tempSpells;
-            //Func<string, Type, string, Func<string>, IEnumerable<Spell>, IEnumerable<Spell>> find = 
-            //    (
-            //        (defaultValue, t, property, cmp, inputList) => 
-            //        inputList.Where(x => ((t)x.GetType().GetProperty(property).GetMethod(cmp).Invoke())
-
-
 
             // Search parameter
             tempSpells = _allSpells.Where(x => x.Name.ToLower().Contains(_searchText.ToLower()));
 
             // Class filter
-            tempSpells = ClassValue != "Classes" ? tempSpells.Where(x => x.Classes.Contains((Class)Enum.Parse(typeof(Class), _classValue))) : tempSpells;
-            tempSpells = ClassValue != "Classes" ? tempSpells.Where(x => (bool)typeof(List<Class>).GetMethod("Contains").Invoke((List<Class>)x.GetType().GetProperty("Classes").GetValue(x), new[] { Enum.Parse(typeof(Class), _classValue) })) : tempSpells;
-
+            tempSpells = ClassValue == "Classes" || ClassValue == null ? tempSpells : tempSpells.Where(spell => spell.Classes.Contains((Class)Enum.Parse(typeof(Class), ClassValue)));
 
             // Level filter
-            tempSpells = SpellLevel != "Spell Level" ? tempSpells.Where(x => x.Level.Equals(SpellLevel)) : tempSpells;
+            tempSpells = SpellLevel == "Spell Level" || SpellLevel == null ? tempSpells : tempSpells.Where(spell => spell.Level.Equals(SpellLevel));
 
+            tempSpells = SchoolValue == "Schools" || SchoolValue == null ? tempSpells : tempSpells.Where(spell => spell.School.Equals((SpellSchool)Enum.Parse(typeof(SpellSchool), SchoolValue)));
 
+            tempSpells = CastingValue == "Casting Time" || CastingValue == null ? tempSpells : tempSpells.Where(spell => spell.CastTime.Contains(CastingValue));
 
+            if (ConcentrationCheckBoxYes)
+            {
+                tempSpells = tempSpells.Where(spell => spell.Duration.Contains("Concentration"));
+            }
+            else if (ConcentrationCheckBoxNo)
+            {
+                tempSpells = tempSpells.Where(spell => !spell.Duration.Contains("Concentration"));
+
+            }
             return new ObservableCollection<Spell>(tempSpells);
                     
         }

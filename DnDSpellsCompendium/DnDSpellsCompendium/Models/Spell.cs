@@ -23,7 +23,11 @@ namespace DnDSpellsCompendium
             get => GetSpellLevel(_level); 
         }
 
-        public string CastTime { get; set; }
+        private string _castTime;
+        public string CastTime
+        {
+            get => _castTime == "Special" ? "Reaction" : _castTime;
+        }
         public string Range { get; set; }
         private string _components;
         public string Components
@@ -44,7 +48,7 @@ namespace DnDSpellsCompendium
             Range = range;
             _components = components;
             Duration = duration;
-            CastTime = castTime;
+            _castTime = castTime;
             School = school;
             Classes = classes;
             HigherLevel = higherLevel;
