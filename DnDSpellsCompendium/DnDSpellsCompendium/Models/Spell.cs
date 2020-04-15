@@ -35,6 +35,12 @@ namespace DnDSpellsCompendium
             get => GetComponentLettersOnly(_components); 
 
         }
+
+        public string FullComponents
+        {
+            get => _components;
+
+        }
         public string Duration { get; set; }
         public SpellSchool School { get; set; }
         public List<Class> Classes { get; set; }

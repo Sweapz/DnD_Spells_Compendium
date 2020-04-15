@@ -4,8 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DnDSpellsCompendium.Controls"
+             xmlns:helpers="clr-namespace:DnDSpellsCompendium.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <helpers:ListToStringConverter x:Key="ListToStringConverter"/>
+        <helpers:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
+    </UserControl.Resources>
+    
     <Grid Background="{StaticResource BackgroundLightBrush}" Margin="0">
         
         <Grid.RowDefinitions>
@@ -18,13 +25,108 @@
                 <TextBlock Grid.Row="0" Margin="5 0" Text="{Binding ActiveSpell.Name}" Style="{StaticResource TextStyleActiveTitle}"/>
 
             </Border>
-            <Separator Background="LightGray"/>
         </StackPanel>
-        <TextBlock 
-            Grid.Row="1"
-            Text="{Binding ActiveSpell.Description}" 
-            Style="{StaticResource TextStyleListMedium}"
-            TextWrapping="Wrap"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock 
+                    Margin="5 0 0 5"
+                    Style="{StaticResource TextStyleListMedium}"
+                    TextWrapping="Wrap">
+                    <TextBlock>This is a</TextBlock>
+                    <TextBlock Text="{Binding ActiveSpell.Classes, Converter={StaticResource ListToStringConverter}}" FontStyle="Italic"/>
+                    <TextBlock>   spell</TextBlock>
+                </TextBlock>
+                
+                <TextBlock
+                    Margin="5 0 0 5"
+                    Text="{Binding ActiveSpell.Description}" 
+                    Style="{StaticResource TextStyleListMedium}"
+                    TextWrapping="Wrap"/>
+                <TextBlock Margin="5 0 0 0" Style="{StaticResource TextStyleListTitle}" Text="Higher Level" Visibility="{Binding ActiveSpell.HigherLevel, Converter={StaticResource NullVisibilityConverter}}"/>
+                <TextBlock
+                    Margin="5 1"
+                    Text="{Binding ActiveSpell.HigherLevel}" 
+                    Style="{StaticResource TextStyleListMedium}"
+                    TextWrapping="Wrap"/>
+            </StackPanel>
+            
+
+            <Separator Grid.Column="1" HorizontalAlignment="Left" Margin="0 -10" Background="{StaticResource BackgroundMediumBrush}">
+                <Separator.LayoutTransform>
+                    <RotateTransform Angle="90" />
+                </Separator.LayoutTransform>
+            </Separator>
+
+            <Grid Grid.Column="1" Margin="0 0 100 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Grid.Column="0">
+                    <Border Margin="5" Padding="5" BorderThickness="1" BorderBrush="{StaticResource BackgroundDarkBrush}" CornerRadius="10" HorizontalAlignment="Center">
+                        <TextBlock Text="School" HorizontalAlignment="Center" Style="{StaticResource TextStyleListMedium}"/>
+                    </Border>
+
+                    <TextBlock Text="{Binding ActiveSpell.School}" HorizontalAlignment="Center" Style="{StaticResource TextStyleListSmall}"/>
+
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1">
+                    <Border Margin="5" Padding="5" BorderThickness="1" BorderBrush="{StaticResource BackgroundDarkBrush}" CornerRadius="10" HorizontalAlignment="Center">
+                        <TextBlock Text="Level" HorizontalAlignment="Center" Style="{StaticResource TextStyleListMedium}"/>
+                    </Border>
+
+                    <TextBlock Text="{Binding ActiveSpell.Level}" HorizontalAlignment="Center" Style="{StaticResource TextStyleListSmall}"/>
+
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <Border Margin="5" Padding="5" BorderThickness="1" BorderBrush="{StaticResource BackgroundDarkBrush}" CornerRadius="10" HorizontalAlignment="Center">
+                        <TextBlock Text="Range" HorizontalAlignment="Center" Style="{StaticResource TextStyleListMedium}"/>
+                    </Border>
+
+                    <TextBlock Text="{Binding ActiveSpell.Range}" HorizontalAlignment="Center" Style="{StaticResource TextStyleListSmall}"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1">
+                    <Border Margin="5" Padding="5" BorderThickness="1" BorderBrush="{StaticResource BackgroundDarkBrush}" CornerRadius="10" HorizontalAlignment="Center">
+                        <TextBlock Text="Casting Time" HorizontalAlignment="Center" Style="{StaticResource TextStyleListMedium}"/>
+                    </Border>
+
+                    <TextBlock Text="{Binding ActiveSpell.CastTime}" HorizontalAlignment="Center" Style="{StaticResource TextStyleListSmall}"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="0">
+                    <Border Margin="5" Padding="5" BorderThickness="1" BorderBrush="{StaticResource BackgroundDarkBrush}" CornerRadius="10" HorizontalAlignment="Center">
+                        <TextBlock Text="Components" HorizontalAlignment="Center" Style="{StaticResource TextStyleListMedium}"/>
+                    </Border>
+
+                    <TextBlock Text="{Binding ActiveSpell.FullComponents}" HorizontalAlignment="Center" Style="{StaticResource TextStyleListSmall}" TextWrapping="Wrap" MaxWidth="200"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="1">
+                    <Border Margin="5" Padding="5" BorderThickness="1" BorderBrush="{StaticResource BackgroundDarkBrush}" CornerRadius="10" HorizontalAlignment="Center">
+                        <TextBlock Text="Duration" HorizontalAlignment="Center" Style="{StaticResource TextStyleListMedium}"/>
+                    </Border>
+
+                    <TextBlock Text="{Binding ActiveSpell.Duration}" HorizontalAlignment="Center" Style="{StaticResource TextStyleListSmall}"/>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
 
     </Grid>
 </UserControl>

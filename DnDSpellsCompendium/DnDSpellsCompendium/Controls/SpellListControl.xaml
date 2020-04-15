@@ -13,14 +13,14 @@
     </UserControl.Resources>
     <UserControl.Template>
         <ControlTemplate TargetType="UserControl">
-            <Border Background="{StaticResource BackgroundLightBrush}">
+            <Border Background="{StaticResource BackgroundMediumBrush}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1.2*"/>
                         <RowDefinition Height="10*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" Background="{StaticResource BackgroundMediumBrush}">
+                    <Grid Grid.Row="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>

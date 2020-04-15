@@ -83,6 +83,7 @@
     <Compile Include="Helpers\InverseBooleanConverter.cs" />
     <Compile Include="Helpers\JsonSpellDecoder.cs" />
     <Compile Include="Helpers\ListToStringConverter.cs" />
+    <Compile Include="Helpers\NullVisibilityConverter.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\DnDClass.cs" />
     <Compile Include="Models\Spell.cs" />
