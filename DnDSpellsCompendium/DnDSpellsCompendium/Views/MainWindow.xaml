@@ -61,7 +61,7 @@
                 </ListView.ItemContainerStyle>
             </ListView>-->
             <controls:SpellListControl x:Name="SpellController">
-                <ListView SelectedItem="{Binding ActiveSpell, Mode=TwoWay}" ItemsSource="{Binding Spells}" x:Uid="SpellControllerListView">
+                <ListView SelectedItem="{Binding ActiveSpell, Mode=TwoWay}" ItemsSource="{Binding Spells}" x:Uid="SpellControllerListView" Padding="0">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -70,22 +70,15 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <controls:SpellListItemControl/>
+                            
                         </DataTemplate>
                         
                     </ListView.ItemTemplate>
                 </ListView>
             </controls:SpellListControl>
-                
 
-            <DockPanel Background="{StaticResource BackgroundLightBrush}" Grid.Column="1">
-                <TextBlock Text="{Binding ActiveSpell.Name}" Style="{StaticResource TextStyleActiveTitle}" DockPanel.Dock="Top"/>
-                <TextBlock 
-                    Text="{Binding ActiveSpell.Description}" 
-                    Style="{StaticResource TextStyleListMedium}" 
-                    DockPanel.Dock="Bottom"
-                    TextWrapping="Wrap"/>
+            <controls:SpellDisplayControl Grid.Column="1"/>
 
-            </DockPanel>
         </Grid>
     </Grid>
 

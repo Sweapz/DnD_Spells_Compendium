@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="DnDSpellsCompendium.Controls.SpellDisplayControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DnDSpellsCompendium.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="{StaticResource BackgroundLightBrush}" Margin="0">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel>
+            <Border Background="{StaticResource BackgroundMediumBrush}">
+                <TextBlock Grid.Row="0" Margin="5 0" Text="{Binding ActiveSpell.Name}" Style="{StaticResource TextStyleActiveTitle}"/>
+
+            </Border>
+            <Separator Background="LightGray"/>
+        </StackPanel>
+        <TextBlock 
+            Grid.Row="1"
+            Text="{Binding ActiveSpell.Description}" 
+            Style="{StaticResource TextStyleListMedium}"
+            TextWrapping="Wrap"/>
+
+    </Grid>
+</UserControl>

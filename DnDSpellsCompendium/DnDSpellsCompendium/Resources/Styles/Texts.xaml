@@ -23,7 +23,7 @@
 
     <Style TargetType="TextBlock" x:Key="TextStyleActiveTitle">
         <Setter Property="Foreground" Value="{StaticResource TextColorBrush}" />
-        <Setter Property="FontSize" Value="30" />
+        <Setter Property="FontSize" Value="40" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
     </Style>
