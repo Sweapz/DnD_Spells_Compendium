@@ -14,27 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DnDSpellsCompendium.Controls
+namespace DnDSpellsCompendium
 {
     /// <summary>
-    /// Interaction logic for SpellListControl.xaml
+    /// Interaction logic for MenuView.xaml
     /// </summary>
-    public partial class SpellListControl : UserControl
+    public partial class MenuView : UserControl
     {
-        public SpellListControl()
+        public MenuView()
         {
             InitializeComponent();
-
-            
-        }
-
-        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                var spellBookViewModel = (sender as TextBox).DataContext as SpellBookViewModel;
-                spellBookViewModel.SearchText = (sender as TextBox).Text;
-            }
         }
     }
 }
