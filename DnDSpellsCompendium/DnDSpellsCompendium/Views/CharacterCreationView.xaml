@@ -1,11 +1,17 @@
 ﻿<UserControl x:Class="DnDSpellsCompendium.CharacterCreationView"
+             x:Name="CharacterView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:helpers="clr-namespace:DnDSpellsCompendium.Helpers"
              xmlns:local="clr-namespace:DnDSpellsCompendium"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <helpers:StringToIntConverter x:Key="StringToIntConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -14,7 +20,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
@@ -25,52 +31,59 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Name" Background="{StaticResource TextColorBrush}" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Background="{StaticResource BackgroundLightBrush}" Margin="3" Foreground="{StaticResource TextColorBrush}" VerticalAlignment="Center" Width="200"/>
+            <TextBlock Grid.Column="0" Text="Name" Background="{StaticResource TextColorBrush}" VerticalAlignment="Center" Padding="3 3 0 3"/>
+            <TextBox Text="{Binding Name, Mode=OneWayToSource}" Grid.Column="1" Background="{StaticResource BackgroundLightBrush}" Margin="3" Foreground="{StaticResource TextColorBrush}" VerticalAlignment="Center" Width="200"/>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="2.3*"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Content="Add Class" Background="{StaticResource BackgroundDarkBrush}" HorizontalAlignment="Stretch" Command="{Binding AddClassCommand}" VerticalAlignment="Top" Margin="2"/>
+            <ComboBox 
+                Grid.Row="0" 
+                ItemsSource="{Binding Classes}" 
+                Background="{StaticResource TextColorBrush}" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Top"
+                SelectedItem="{Binding SelectedClass, Mode=TwoWay, Delay=1, UpdateSourceTrigger=PropertyChanged}"
+                Padding="3 3 0 3"/>
 
-            <ListView Grid.Row="1" ItemsSource="{Binding ClassesList}" HorizontalAlignment="Stretch" Margin="5">
+            <ListView Grid.Row="1" ItemsSource="{Binding ClassesList}" HorizontalAlignment="Stretch" Margin="5" Foreground="{StaticResource TextColorBrush}" x:Name="ClassesList">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="IsSelected" Value="True"/>
+                            </Trigger>
+                        </Style.Triggers>
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <Setter Property="Padding" Value="2 0 10 0"/>
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ComboBox
-                            ItemsSource="{Binding}"
-                            Grid.Row="1"
-                            Foreground="{StaticResource TextColorBrush}" 
-                            VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                            Margin="2" SelectedIndex="0"/>
+                        <Grid HorizontalAlignment="Stretch">
+                            <TextBlock Text="{Binding Name}" Foreground="{StaticResource TextColorBrush}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <ComboBox HorizontalAlignment="Right" Margin="0 0 10 0"
+                                          ItemsSource="{Binding Source={x:Reference CharacterView}, Path=DataContext.Levels}" 
+                                          SelectedIndex="0" 
+                                          SelectedValue="{Binding ClassLevel, Mode=OneWayToSource, Converter={StaticResource StringToIntConverter}}"/>
+                                <Button HorizontalAlignment="Right" ToolTip="Icon" Style="{StaticResource MaterialDesignIconButton}" Command="{Binding Source={x:Reference CharacterView}, Path=DataContext.RemoveClassCommand}" CommandParameter="{Binding SelectedValue, ElementName=ClassesList}">
+                                    <materialDesign:PackIcon Kind="Clear" Foreground="Red"/>
+                                </Button>
+                            </StackPanel>
+                            
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
             
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Some Prop" Background="{StaticResource TextColorBrush}" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Background="{StaticResource BackgroundLightBrush}" Margin="3" Foreground="{StaticResource TextColorBrush}" VerticalAlignment="Center" Width="200"/>
-        </Grid>
-        <Grid Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Some Prop" Background="{StaticResource TextColorBrush}" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" Background="{StaticResource BackgroundLightBrush}" Margin="3" Foreground="{StaticResource TextColorBrush}" VerticalAlignment="Center" Width="200"/>
-        </Grid>
-        <Button Grid.ColumnSpan="3" Grid.Row="5">Save</Button>
+
+        <Button Grid.ColumnSpan="3" Grid.Row="5" Command="{Binding SaveCharacterCommand}">Save</Button>
     </Grid>
 </UserControl>
+
+    
+    

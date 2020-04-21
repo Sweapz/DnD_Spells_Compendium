@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DnDSpellsCompendium.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,20 @@ namespace DnDSpellsCompendium
 {
 	public class DnDClass
 	{
-		public string Name { get; set; }
+		public Class Name { get; set; }
 		public int ClassLevel { get; set; }
 		public Spellbook Spells { get; set; }
 
 
-		public DnDClass()
+        public DnDClass(Class name, int classLevel)
 		{
-			
-		}
-	}
+            Name = name;
+            ClassLevel = classLevel;
+        }
+
+        public override string ToString()
+        {
+            return "Name: " + Name.ToString() + "\n" + "Class Level: " + ClassLevel.ToString();
+        }
+    }
 }

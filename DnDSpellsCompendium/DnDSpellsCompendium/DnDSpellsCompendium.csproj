@@ -73,6 +73,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\CrossButton.xaml.cs">
+      <DependentUpon>CrossButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SpellDisplayControl.xaml.cs">
       <DependentUpon>SpellDisplayControl.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,7 @@
     <Compile Include="Helpers\JsonSpellDecoder.cs" />
     <Compile Include="Helpers\ListToStringConverter.cs" />
     <Compile Include="Helpers\NullVisibilityConverter.cs" />
+    <Compile Include="Helpers\StringToIntConverter.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\DnDClass.cs" />
     <Compile Include="Models\Spell.cs" />
@@ -106,6 +110,10 @@
     <Compile Include="Views\SpellBookView.xaml.cs">
       <DependentUpon>SpellBookView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\CrossButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\SpellDisplayControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
