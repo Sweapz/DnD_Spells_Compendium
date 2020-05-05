@@ -7,7 +7,7 @@ namespace DnDSpellsCompendium
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = (sender, e) => { };
-
+        [SuppressPropertyChangedWarnings]
         public void OnProperyChanged(string name)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(name));

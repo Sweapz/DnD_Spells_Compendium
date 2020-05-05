@@ -14,9 +14,6 @@
             <DataTemplate DataType="{x:Type viewModel:MenuViewModel}">
                 <local:MenuView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type viewModel:CharacterCreationViewModel}">
-                <local:CharacterCreationView/>
-            </DataTemplate>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colours.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>

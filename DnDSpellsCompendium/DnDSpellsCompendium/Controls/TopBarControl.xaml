@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="DnDSpellsCompendium.Controls.TopBarControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DnDSpellsCompendium.Controls"
+             xmlns:main="clr-namespace:DnDSpellsCompendium"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1800">
+    <Grid>
+        <Grid Height="50" Background="{StaticResource BackgroundDarkBrush}" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+            <Grid Grid.Column="0" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button 
+                Grid.Column="0"
+                Style="{StaticResource CurrentTabButtonStyle}"
+                Content="All Spells"
+                FontSize="22"/>
+
+                <Separator Grid.Column="1" HorizontalAlignment="Left" Background="{StaticResource BackgroundMediumBrush}">
+                    <Separator.LayoutTransform>
+                        <RotateTransform Angle="90" />
+                    </Separator.LayoutTransform>
+                </Separator>
+
+                <Button 
+                Grid.Column="1"
+                Style="{StaticResource TabButtonStyle}"
+                Content="My Spells"
+                FontSize="22"/>
+
+                <Separator Grid.Column="2" HorizontalAlignment="Left" Background="{StaticResource BackgroundMediumBrush}">
+                    <Separator.LayoutTransform>
+                        <RotateTransform Angle="90" />
+                    </Separator.LayoutTransform>
+                </Separator>
+
+                <Button 
+                Grid.Column="2"
+                Style="{StaticResource TabButtonStyle}"
+                Content="Prepared Spells"
+                FontSize="22"/>
+            </Grid>
+
+            <Button 
+                HorizontalAlignment="Right" 
+                ToolTip="Icon" 
+                Grid.Column="1" 
+                Style="{StaticResource MaterialDesignIconButton}" Command="{
+                Binding RelativeSource={RelativeSource Mode=FindAncestor, 
+                AncestorType={x:Type main:MainWindow}}, 
+                Path=DataContext.OpenTopBarCommand,
+                Mode=OneWay}">
+                
+                <materialDesign:PackIcon Kind="HamburgerMenu" Foreground="{StaticResource TextColorBrush}"/>
+            </Button>
+        </Grid>
+    </Grid>
+    
+</UserControl>

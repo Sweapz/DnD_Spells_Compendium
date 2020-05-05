@@ -14,8 +14,21 @@
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="TextStyleListSmallDark">
+        <Setter Property="Foreground" Value="{StaticResource BackgroundDarkBrush}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+    </Style>
+
     <Style TargetType="TextBlock" x:Key="TextStyleListTitle">
         <Setter Property="Foreground" Value="{StaticResource TextColorBrush}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="TextStyleListTitleDark">
+        <Setter Property="Foreground" Value="{StaticResource BackgroundDarkBrush}" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
@@ -24,7 +37,6 @@
     <Style TargetType="TextBlock" x:Key="TextStyleActiveTitle">
         <Setter Property="Foreground" Value="{StaticResource TextColorBrush}" />
         <Setter Property="FontSize" Value="40" />
-        <Setter Property="FontWeight" Value="Bold" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
     </Style>
 

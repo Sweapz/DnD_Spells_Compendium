@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace DnDSpellsCompendium.Controls
 {
     /// <summary>
-    /// Interaction logic for CrossButton.xaml
+    /// Interaction logic for TopBarControl.xaml
     /// </summary>
-    public partial class CrossButton : UserControl
+    public partial class TopBarControl : UserControl
     {
-        public CrossButton()
+        public TopBarControl()
         {
             InitializeComponent();
+        }
+
+        private void PopupBox_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Console.WriteLine("Hmm");
         }
     }
 }

@@ -11,6 +11,9 @@
     <Color x:Key="BackgroundDark">#1E2123</Color>
     <SolidColorBrush x:Key="BackgroundDarkBrush" Color="{StaticResource BackgroundDark}"/>
 
+    <Color x:Key="SideBarColor">#bfbfbf</Color>
+    <SolidColorBrush x:Key="SideBarColorBrush" Color="{StaticResource SideBarColor}"/>
+
     <Color x:Key="TextColor">#dfdfdf</Color>
     <SolidColorBrush x:Key="TextColorBrush" Color="{StaticResource TextColor}"/>
 

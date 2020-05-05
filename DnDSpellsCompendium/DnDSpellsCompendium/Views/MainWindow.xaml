@@ -26,8 +26,77 @@
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Window.Resources>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <controls:TopBarControl Grid.Row="0"/>
 
-    <ContentControl Content="{Binding CurrentViewModel}" />
+        <ContentControl Content="{Binding CurrentViewModel}" Grid.Row="1" />
+        
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="300" 
+              Background="{StaticResource SideBarColorBrush}" Visibility="{Binding TopBarVisibility, Converter={StaticResource BooleanToVisibilityConverter}}" 
+              Grid.RowSpan="2" Opacity="0.5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <TextBlock Text="Characters" Foreground="Black" HorizontalAlignment="Left" FontSize="22" VerticalAlignment="Center" Margin="5 0 0 0"/>
+                <Button 
+                    HorizontalAlignment="Right" 
+                    ToolTip="Icon"
+                    Style="{StaticResource MaterialDesignIconButton}" Command="{Binding OpenTopBarCommand, Mode=OneWay}">
+                    <materialDesign:PackIcon Kind="HamburgerMenu" Foreground="{StaticResource TextColorBrush}" />
+                </Button>
+            </Grid>
+
+            <ListView ItemsSource="{Binding Characters}" Padding="0" Grid.Row="1" SelectedValue="{Binding SelectedCharacter, Mode=OneWayToSource}" SelectedIndex="{Binding SelectedCharacterIndex, Mode=OneWayToSource}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="2 0 10 0"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CharacterListItemControl/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Remove" Command="{Binding RemoveCharacterCommand}"/>
+                        
+                    </ContextMenu>
+                </ListView.ContextMenu>
+            </ListView>
+
+            <Button HorizontalAlignment="Stretch" Background="Transparent"  Grid.Row="2" BorderBrush="Transparent" Height="{Binding ActualHeight}"
+                    Command="{Binding CreateCharacterCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Add" Foreground="{StaticResource BackgroundDarkBrush}">
+                        <materialDesign:PackIcon.LayoutTransform>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.8" ScaleY="1.8"/>
+                        </materialDesign:PackIcon.LayoutTransform>
+                    </materialDesign:PackIcon>
+                    <TextBlock Text="Create New Character" VerticalAlignment="Center" Style="{StaticResource TextStyleListTitleDark}"/>
+                </StackPanel>
+            </Button>
+
+            <controls:CharacterCreationControl  VerticalAlignment="Bottom" Height="300" Grid.RowSpan="3" 
+                                                Visibility="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:MainWindow}}, 
+                                                             Path=DataContext.CharacterCreationVisibility,
+                                                             Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}"
+                                                />
+        </Grid>
+    </Grid>
     
+
 </Window>

@@ -8,8 +8,6 @@ namespace DnDSpellsCompendium
 {
 	public class Character
 	{
-        
-
         public string Name { get; set; }
 		public int TotalLevel { get; set; }
 		public List<DnDClass> Classes { get; set; }

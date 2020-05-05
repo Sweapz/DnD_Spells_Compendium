@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DnDSpellsCompendium
+namespace DnDSpellsCompendium.Controls
 {
     /// <summary>
     /// Interaction logic for CharaterCreationView.xaml
     /// </summary>
-    public partial class CharacterCreationView : UserControl
+    public partial class CharacterCreationControl : UserControl
     {
-        public CharacterCreationView()
+        public CharacterCreationControl()
         {
             InitializeComponent();
         }
